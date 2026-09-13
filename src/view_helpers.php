@@ -9,6 +9,7 @@ use Naf\Form\Support\Csrf;
 use function Naf\app;
 use function Naf\param;
 use function Naf\guard;
+use function Naf\request;
 
 function memory(string $key, mixed $default = null):? string
 {
@@ -59,7 +60,7 @@ function error_class($field, Validator $validator): string
 
 function is_post(): bool
 {
-    return app()->container()->get('request')->getMethod() === 'POST';
+    return request()->getMethod() === 'POST';
 }
 
 function csrf(): Csrf

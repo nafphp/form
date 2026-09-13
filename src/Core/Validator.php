@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\Form\Core;
+namespace Naf\Form\Core;
 
 class Validator
 {

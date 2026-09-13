@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use NixPHP\Form\Core\Validator;
-use NixPHP\Form\Events\CsrfListener;
-use NixPHP\Form\Support\Csrf;
-use NixPHP\Core\EventManager;
-use NixPHP\Core\Event;
-use function NixPHP\app;
-use function NixPHP\guard;
+use Naf\Form\Core\Validator;
+use Naf\Form\Events\CsrfListener;
+use Naf\Form\Support\Csrf;
+use Naf\Core\EventManager;
+use Naf\Core\Event;
+use function Naf\app;
+use function Naf\guard;
 
 guard()->register('csrf', function() {
     return new Csrf();

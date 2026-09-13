@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\Form\Core\Validator;
-use Tests\NixPHPTestCase;
+use Naf\Form\Core\Validator;
+use Tests\NafTestCase;
 
-class ValidatorTest extends NixPHPTestCase
+class ValidatorTest extends NafTestCase
 {
     public function testRegisterValidator()
     {

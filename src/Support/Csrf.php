@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\Form\Support;
+namespace Naf\Form\Support;
 
-use function NixPHP\Session\session;
+use function Naf\Session\session;
 
 class Csrf
 {

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use NixPHP\Core\Config;
-use NixPHP\Core\Route;
+use Naf\Core\Config;
+use Naf\Core\Route;
 use Nyholm\Psr7\ServerRequest;
-use NixPHP\Form\Events\CsrfListener;
-use NixPHP\Exceptions\AbortException;
-use Tests\NixPHPTestCase;
-use function NixPHP\app;
-use function NixPHP\Session\session;
+use Naf\Form\Events\CsrfListener;
+use Naf\Exceptions\AbortException;
+use Tests\NafTestCase;
+use function Naf\app;
+use function Naf\Session\session;
 
-class CsrfListenerTest extends NixPHPTestCase
+class CsrfListenerTest extends NafTestCase
 {
 
     public function testSuccessful()

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\Form;
+namespace Naf\Form;
 
-use NixPHP\Form\Core\Validator;
-use NixPHP\Form\Support\Csrf;
-use function NixPHP\app;
-use function NixPHP\param;
-use function NixPHP\guard;
+use Naf\Form\Core\Validator;
+use Naf\Form\Support\Csrf;
+use function Naf\app;
+use function Naf\param;
+use function Naf\guard;
 
 function memory(string $key, mixed $default = null):? string
 {

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use NixPHP\Form\Core\Validator;
+use Naf\Form\Core\Validator;
 use PHPUnit\Framework\TestCase;
 
-class NixPHPTestCase extends TestCase
+class NafTestCase extends TestCase
 {
 
     protected function tearDown(): void

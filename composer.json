@@ -1,9 +1,9 @@
 {
-  "name": "nixphp/form",
-  "description": "NixPHP Form Plugin to make form handling easier.",
+  "name": "naf/form",
+  "description": "NAF Form Plugin to make form handling easier.",
   "minimum-stability": "stable",
   "license": "MIT",
-  "type": "nixphp-plugin",
+  "type": "naf-plugin",
   "authors": [
     {
       "name": "Flo Knapp",
@@ -12,7 +12,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "NixPHP\\Form\\": "src/"
+      "Naf\\Form\\": "src/"
     }
   },
   "autoload-dev": {
@@ -23,8 +23,8 @@
   "require": {
     "php": ">=8.3",
     "ext-mbstring": "*",
-    "nixphp/framework": "^0.1.0",
-    "nixphp/session": "^0.1.0"
+    "naf/framework": "^0.2",
+    "naf/session": "^0.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^12.1",

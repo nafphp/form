@@ -1,21 +1,21 @@
 <div style="text-align: center;">
 
-![Logo](https://nixphp.github.io/docs/assets/nixphp-logo-small-square.png)
+![NAF](assets/naf-logo-small-square.png)
 
-[![NixPHP Form Plugin](https://github.com/nixphp/form/actions/workflows/php.yml/badge.svg)](https://github.com/nixphp/form/actions/workflows/php.yml)
+[![NAF Form Plugin](https://github.com/nafphp/form/actions/workflows/php.yml/badge.svg)](https://github.com/nafphp/form/actions/workflows/php.yml)
 
 </div>
 
-[← Back to NixPHP](https://github.com/nixphp/framework)
+[← Back to NAF](https://github.com/nafphp/framework)
 
 ---
 
-# nixphp/form
+# naf/form
 
-> **Form handling the NixPHP way — minimal, secure, intuitive, extendable.**
+> **Form handling the NAF way — minimal, secure, intuitive, extendable.**
 
 This plugin provides **form memory**, **CSRF protection**, a flexible **Validator system**,
-and a full set of **view helpers** for easy form handling in your NixPHP applications.
+and a full set of **view helpers** for easy form handling in your NAF applications.
 
 Everything is registered automatically and works without configuration.
 
@@ -37,7 +37,7 @@ Everything is registered automatically and works without configuration.
 ## 📥 Installation
 
 ```bash
-composer require nixphp/form
+composer require naf/form
 ```
 
 The plugin registers itself. No additional setup needed.
@@ -212,8 +212,8 @@ All without configuration.
 
 ## 📁 Requirements
 
-* `nixphp/framework` ≥ 0.1.0
-* `nixphp/session` ≥ 0.1.0 (required for CSRF + memory)
+* `naf/framework` ≥ 0.1.0
+* `naf/session` ≥ 0.1.0 (required for CSRF + memory)
 
 ---
 

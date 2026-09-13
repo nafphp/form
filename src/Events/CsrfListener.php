@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace NixPHP\Form\Events;
+namespace Naf\Form\Events;
 
-use NixPHP\Core\Route;
-use NixPHP\Exceptions\AbortException;
+use Naf\Core\Route;
+use Naf\Exceptions\AbortException;
 use Psr\Http\Message\ServerRequestInterface;
-use function NixPHP\abort;
-use function NixPHP\app;
-use function NixPHP\config;
-use function NixPHP\Form\csrf;
+use function Naf\abort;
+use function Naf\app;
+use function Naf\config;
+use function Naf\Form\csrf;
 
 class CsrfListener
 {

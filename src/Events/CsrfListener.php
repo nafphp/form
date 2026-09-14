@@ -7,6 +7,7 @@ namespace Naf\Form\Events;
 use Naf\Core\Route;
 use Naf\Exceptions\AbortException;
 use Psr\Http\Message\ServerRequestInterface;
+
 use function Naf\abort;
 use function Naf\app;
 use function Naf\config;
@@ -14,7 +15,6 @@ use function Naf\Form\csrf;
 
 class CsrfListener
 {
-
     /**
      * @param ServerRequestInterface $request
      *
@@ -35,9 +35,10 @@ class CsrfListener
             return;
         }
 
-        $body = $request->getParsedBody();
+        $body      = $request->getParsedBody();
         $csrfToken = is_array($body) && array_key_exists('_csrf', $body)
-            ? $body['_csrf'] : $request->getHeaderLine('X-CSRF-Token');
+                ? $body['_csrf']
+                : $request->getHeaderLine('X-CSRF-Token');
 
         if (!is_string($csrfToken) || $csrfToken === '' || strlen($csrfToken) > 1024) {
             abort(400, 'CSRF token missing or malformed.');

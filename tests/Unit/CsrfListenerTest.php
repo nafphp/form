@@ -6,25 +6,25 @@ namespace Tests\Unit;
 
 use Naf\Core\Config;
 use Naf\Core\Route;
-use Nyholm\Psr7\ServerRequest;
-use Naf\Form\Events\CsrfListener;
 use Naf\Exceptions\AbortException;
+use Naf\Form\Events\CsrfListener;
+use Nyholm\Psr7\ServerRequest;
 use Tests\NafTestCase;
+
 use function Naf\app;
 use function Naf\Session\session;
 
 class CsrfListenerTest extends NafTestCase
 {
-
     public function testSuccessful()
     {
         $this->expectNotToPerformAssertions();
 
         session()->start();
         $_SESSION['_csrf'] = 'test';
-        $requestMock = new ServerRequest('POST', '/test');
-        $requestMock = $requestMock->withParsedBody(['_csrf' => 'test']);
-        $listener = new CsrfListener();
+        $requestMock       = new ServerRequest('POST', '/test');
+        $requestMock       = $requestMock->withParsedBody(['_csrf' => 'test']);
+        $listener          = new CsrfListener();
         $listener->handle($requestMock);
     }
 
@@ -32,7 +32,7 @@ class CsrfListenerTest extends NafTestCase
     {
         $this->expectNotToPerformAssertions();
 
-        $request = new ServerRequest('GET', '/test');
+        $request  = new ServerRequest('GET', '/test');
         $listener = new CsrfListener();
         $listener->handle($request);
     }
@@ -42,7 +42,7 @@ class CsrfListenerTest extends NafTestCase
         $this->expectException(AbortException::class);
 
         $requestMock = new ServerRequest('POST', '/test');
-        $listener = new CsrfListener();
+        $listener    = new CsrfListener();
         $listener->handle($requestMock);
     }
 
@@ -52,9 +52,9 @@ class CsrfListenerTest extends NafTestCase
 
         session()->start();
         $_SESSION['_csrf'] = 'other';
-        $requestMock = new ServerRequest('POST', '/test');
-        $requestMock = $requestMock->withParsedBody(['_csrf' => 'test']);
-        $listener = new CsrfListener();
+        $requestMock       = new ServerRequest('POST', '/test');
+        $requestMock       = $requestMock->withParsedBody(['_csrf' => 'test']);
+        $listener          = new CsrfListener();
         $listener->handle($requestMock);
     }
 
@@ -64,10 +64,9 @@ class CsrfListenerTest extends NafTestCase
 
         $requestMock = new ServerRequest('POST', '/test');
         $requestMock = $requestMock->withHeader('Authorization', 'Bearer test');
-        $listener = new CsrfListener();
+        $listener    = new CsrfListener();
         $listener->handle($requestMock);
     }
-
 
     public function testShouldNotIgnoreABrowserSuppliedAuthorizationHeader()
     {
@@ -76,8 +75,10 @@ class CsrfListenerTest extends NafTestCase
         // A browser attaches Basic credentials on its own, so a request carrying
         // them is exactly what CSRF protects against. A Bearer header alone
         // also does not establish a verified authentication mode.
-        $request = (new ServerRequest('POST', '/test'))
-            ->withHeader('Authorization', 'Basic ' . base64_encode('user:pass'));
+        $request = (new ServerRequest('POST', '/test'))->withHeader(
+            'Authorization',
+            'Basic ' . base64_encode('user:pass'),
+        );
 
         (new CsrfListener())->handle($request);
     }

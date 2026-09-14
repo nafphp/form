@@ -58,9 +58,9 @@ class CsrfListenerTest extends NafTestCase
         $listener->handle($requestMock);
     }
 
-    public function testShouldIgnoreWhenAuthorizationHeaderIsPresent()
+    public function testBearerHeaderAloneDoesNotExemptCsrf()
     {
-        $this->expectNotToPerformAssertions();
+        $this->expectException(AbortException::class);
 
         $requestMock = new ServerRequest('POST', '/test');
         $requestMock = $requestMock->withHeader('Authorization', 'Bearer test');
@@ -74,8 +74,8 @@ class CsrfListenerTest extends NafTestCase
         $this->expectException(AbortException::class);
 
         // A browser attaches Basic credentials on its own, so a request carrying
-        // them is exactly what CSRF protects against. Only a Bearer token, which
-        // nothing attaches automatically, stands for a deliberate caller.
+        // them is exactly what CSRF protects against. A Bearer header alone
+        // also does not establish a verified authentication mode.
         $request = (new ServerRequest('POST', '/test'))
             ->withHeader('Authorization', 'Basic ' . base64_encode('user:pass'));
 

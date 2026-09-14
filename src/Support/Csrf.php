@@ -9,6 +9,15 @@ use function Naf\Session\session;
 class Csrf
 {
 
+    /** Return the current session token, creating it only when absent. */
+    public function token(): string
+    {
+        session()->start();
+        $token = session()->get('_csrf');
+        return is_string($token) && $token !== '' ? $token : $this->generate();
+    }
+
+    /** Explicitly rotate the token after authentication/trust changes. */
     public function generate(): string
     {
         session()->start();

@@ -59,3 +59,7 @@ CSRF tests with actual session cookies and escaped form redisplay. No `analyse` 
 
 User docs: [Forms](https://nafphp.github.io/docs/forms/),
 [contact recipe](https://nafphp.github.io/docs/recipes/contact-form/).
+
+Follow the shared [PHP code style](https://github.com/nafphp/docs/blob/main/CODE_STYLE.md)
+and `.php-cs-fixer.dist.php`. Run `composer style:check`; `composer style:fix` applies the rules.
+Keep logical steps and local names readable, preserving public signatures and template output.

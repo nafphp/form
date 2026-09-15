@@ -7,8 +7,9 @@ namespace Tests\Unit;
 use Nyholm\Psr7\ServerRequest;
 use Psr\Http\Message\RequestInterface;
 use Tests\NafTestCase;
-use function Naf\Form\is_post;
+
 use function Naf\app;
+use function Naf\Form\is_post;
 
 /**
  * The view helpers reach for the current request, and how they reach for it is
@@ -37,7 +38,7 @@ class ViewHelpersTest extends NafTestCase
     {
         app()->container()->set(
             RequestInterface::class,
-            new ServerRequest($method, '/test')
+            new ServerRequest($method, '/test'),
         );
     }
 }

@@ -71,4 +71,14 @@ final class IntegrationHardeningTest extends NafTestCase
         $this->assertFalse($v->validate(['v' => '2025-02-29'], ['v' => 'date'])->isValid());
         $this->assertFalse($v->validate(['v' => null], ['v' => 'boolean'])->isValid());
     }
+
+    public function testDateRuleRejectsNullBytesWithoutThrowing(): void
+    {
+        DefaultRules::register();
+        $validator = new Validator();
+
+        foreach (["2026-09-15\0", "2026-\009-15", "\0"] as $value) {
+            $this->assertFalse($validator->validate(['date' => $value], ['date' => 'date'])->isValid());
+        }
+    }
 }

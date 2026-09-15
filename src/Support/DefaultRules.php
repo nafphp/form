@@ -53,7 +53,7 @@ final class DefaultRules
         Validator::register(
             'date',
             static function ($v): bool {
-                if (!is_string($v)) {
+                if (!is_string($v) || str_contains($v, "\0")) {
                     return false;
                 }
                 $date = DateTimeImmutable::createFromFormat('!Y-m-d', $v);

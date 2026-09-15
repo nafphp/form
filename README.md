@@ -42,4 +42,6 @@ MIT. Part of [NAF](https://github.com/nafphp/framework).
 
 Target branch: `v0.2.3-rc`. This behavior is not a published release yet.
 
+The `date` rule rejects malformed values, including NUL bytes, as validation failures.
+
 csrf()->token() returns a stable per-session token; generate() explicitly rotates it. Unsafe methods including PATCH require a form token or X-CSRF-Token, even with an Authorization header. Explicit named-route exceptions remain available. Missing, malformed or oversized tokens return the established 400 response. Default rules now validate supported scalar/container types and strict calendar dates; required accepts numeric zero and false.

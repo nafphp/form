@@ -38,9 +38,7 @@ composer require naf/form
 MIT. Part of [NAF](https://github.com/nafphp/framework).
 
 
-## Unreleased Nafinity integration candidate
-
-Target branch: `v0.2.3-rc`. This behavior is not a published release yet.
+## Behavior notes
 
 The `date` rule rejects malformed values, including NUL bytes, as validation failures.
 

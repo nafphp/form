@@ -7,6 +7,7 @@ namespace Naf\Form\Events;
 use Naf\Core\Route;
 use Naf\Exceptions\AbortException;
 use Psr\Http\Message\ServerRequestInterface;
+
 use function Naf\abort;
 use function Naf\app;
 use function Naf\config;
@@ -14,7 +15,6 @@ use function Naf\Form\csrf;
 
 class CsrfListener
 {
-
     /**
      * @param ServerRequestInterface $request
      *
@@ -27,7 +27,7 @@ class CsrfListener
             return;
         }
 
-        if (!\in_array($request->getMethod(), ['POST','PUT','DELETE'], true)) {
+        if (\in_array(strtoupper($request->getMethod()), ['GET', 'HEAD', 'OPTIONS'], true)) {
             return;
         }
 
@@ -35,43 +35,18 @@ class CsrfListener
             return;
         }
 
-        if ($this->isBearer($request)) {
-            return;
-        }
+        $body      = $request->getParsedBody();
+        $csrfToken = is_array($body) && array_key_exists('_csrf', $body)
+                ? $body['_csrf']
+                : $request->getHeaderLine('X-CSRF-Token');
 
-        $csrfToken = $request->getParsedBody()['_csrf'] ?? $request->getHeader('X-CSRF-Token') ?? null;
-
-        if (is_array($csrfToken)) {
-            $csrfToken = reset($csrfToken);
-        }
-
-        if (empty($csrfToken)) {
-            abort(400, 'CSRF token missing.');
+        if (!is_string($csrfToken) || $csrfToken === '' || strlen($csrfToken) > 1024) {
+            abort(400, 'CSRF token missing or malformed.');
         }
 
         if (false === csrf()->validate($csrfToken)) {
             abort(400, 'CSRF token invalid.');
         }
-    }
-
-    /**
-     * Whether this request authenticates itself instead of riding a session.
-     *
-     * Only a Bearer token counts. A browser attaches cookies and Basic
-     * credentials on its own, so a request carrying those is exactly the kind
-     * CSRF protects against — it was never proof of anything, and treating any
-     * Authorization header as a pass made the header itself the bypass.
-     *
-     * A Bearer token is different: nothing attaches one automatically, so a
-     * request that has one was built deliberately by whoever holds it.
-     *
-     * @param ServerRequestInterface $request
-     *
-     * @return bool
-     */
-    private function isBearer(ServerRequestInterface $request): bool
-    {
-        return stripos($request->getHeaderLine('Authorization'), 'bearer ') === 0;
     }
 
     /**

@@ -46,8 +46,8 @@ Use `Naf\View\s()` for HTML. The shared validator's errors reset on each `valida
 [Validator](src/Core/Validator.php), [helpers](src/view_helpers.php),
 [CsrfListener](src/Events/CsrfListener.php), [Csrf](src/Support/Csrf.php) and [bootstrap](bootstrap.php)
 are the primary entry points. Extend rules through `Validator::register()`.
-The current CSRF listener checks POST/PUT/DELETE, not PATCH. A Bearer-header exemption does
-not authenticate the request; protocol endpoints still need their authentication mechanism.
+The 0.2.3 candidate checks all methods except GET/HEAD/OPTIONS, including PATCH. A Bearer
+header does not bypass CSRF; protocol endpoints need explicitly exempt routes and authentication.
 Keep exceptions narrowly named in `csrf_exempt_routes`; do not disable validation globally.
 Check the installed version before relying on helper fixes such as `is_post()` in 0.2.1.
 
@@ -59,3 +59,7 @@ CSRF tests with actual session cookies and escaped form redisplay. No `analyse` 
 
 User docs: [Forms](https://nafphp.github.io/docs/forms/),
 [contact recipe](https://nafphp.github.io/docs/recipes/contact-form/).
+
+Follow the shared [PHP code style](https://github.com/nafphp/docs/blob/main/CODE_STYLE.md)
+and `.php-cs-fixer.dist.php`. Run `composer style:check`; `composer style:fix` applies the rules.
+Keep logical steps and local names readable, preserving public signatures and template output.

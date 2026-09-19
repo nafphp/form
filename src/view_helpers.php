@@ -6,12 +6,13 @@ namespace Naf\Form;
 
 use Naf\Form\Core\Validator;
 use Naf\Form\Support\Csrf;
+
 use function Naf\app;
-use function Naf\param;
 use function Naf\guard;
+use function Naf\param;
 use function Naf\request;
 
-function memory(string $key, mixed $default = null):? string
+function memory(string $key, mixed $default = null): ?string
 {
     return param()->get($key);
 }
@@ -35,7 +36,7 @@ function validator(): Validator
     return app()->container()->get(Validator::class);
 }
 
-function error($field, Validator $validator):? string
+function error($field, Validator $validator): ?string
 {
     if (!is_post()) {
         return null;

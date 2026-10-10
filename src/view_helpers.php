@@ -12,9 +12,26 @@ use function Naf\guard;
 use function Naf\param;
 use function Naf\request;
 
+/**
+ * The submitted value of a field in the current request, for refilling a form
+ *
+ * Strings come back as submitted and numbers as strings. A missing field, or a
+ * value that cannot be printed into a field such as the array `name[]=x`
+ * produces, returns $default. The value is not escaped.
+ */
 function memory(string $key, mixed $default = null): ?string
 {
-    return param()->get($key);
+    $value = param()->get($key);
+
+    if (is_string($value)) {
+        return $value;
+    }
+
+    if (is_int($value) || is_float($value)) {
+        return (string) $value;
+    }
+
+    return is_scalar($default) ? (string) $default : null;
 }
 
 function memory_checked(string $key, mixed $value = 'on'): string
